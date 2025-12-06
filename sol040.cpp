@@ -17,36 +17,26 @@ int main() {
     next_board = board;
 
     int rows = board.size(), cols = board[0].size();
-    bool changed = true;
-    while (changed) {
-        changed = false;
-        for (int r=0; r<rows; r++) {
-            for (int c=0; c<cols; c++) {
-                if (board[r][c] == '.') {
-                    continue;
-                }
-                int cnt = 0;
-                for (int i=-1; i<2; i++) {
-                    for (int j=-1; j<2; j++) {
-                        if (i == 0 && j == 0) {
-                            continue;
-                        }
-                        if (r + i < 0 || r + i == rows || c + j < 0 || c + j == cols) {
-                            continue;
-                        }
-                        cnt += board[r+i][c+j] == '@';
+    for (int r=0; r<rows; r++) {
+        for (int c=0; c<cols; c++) {
+            if (board[r][c] == '.') {
+                continue;
+            }
+            int cnt = 0;
+            for (int i=-1; i<2; i++) {
+                for (int j=-1; j<2; j++) {
+                    if (i == 0 && j == 0) {
+                        continue;
                     }
-                }
-                if (cnt < 4) {
-                    next_board[r][c] = '.';
-                    res++;
-                    changed = true;
+                    if (r + i < 0 || r + i == rows || c + j < 0 || c + j == cols) {
+                        continue;
+                    }
+                    cnt += board[r+i][c+j] == '@';
                 }
             }
+            res += cnt < 4;
         }
-        board = next_board;
     }
-    
     fout << res << '\n';
     return 0;
 }
