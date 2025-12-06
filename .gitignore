@@ -1,0 +1,12 @@
+
+
+# Ignore executables with no file extension
+*
+
+# Allow directories and files with extensions
+!*/
+!*.*
+
+.cph/
+.vs/
+.vscode/
