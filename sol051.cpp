@@ -46,12 +46,6 @@ int main() {
         }
     }
 
-    sort(intervals.begin(), intervals.end(),
-        [](const vector<long long>& a, const vector<long long>& b) {
-            return a[0] < b[0];
-        }
-    );
-
     auto merged = merge_intervals(intervals);
     for (int i=0; i<merged.size(); i++) {
         res += merged[i][1] - merged[i][0] + 1;
