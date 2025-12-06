@@ -5,42 +5,33 @@ int main() {
     ifstream fin ("in.txt");
     ofstream fout ("out.txt");
 
-    string s;
+    string line;
+    long long res = 0;
 
-
-    cout << s<< endl;
-
-    regex pattern(R"(mul\((\d+),(\d+)\)|do\(\)|don't\(\))");
-
-
-
-    smatch matches;
-    int x, y;
-    ll res = 0;
-
-    int cur = 1;
-
-    while (getline(fin, s)) {
-        string::const_iterator searchStart(s.cbegin());
-
+    while (getline(fin, line)) {
+        stringstream ss(line);
         
-        while (regex_search(searchStart, s.cend(), matches, pattern)) {
-            if (matches[0].str().find("mul") == 0) {
-                x = stoi(matches[1]);
-                y = stoi(matches[2]);
-                res += x * y * cur;
-            } else if (matches[0] == "do()") {
-                cur = 1;
-            } else if (matches[0] == "don't()") {
-                cur = 0;
+        stack<long long> s;
+        int n = line.length();
+        for (int i=0; i<n; i++) {
+            long long x = line[i] - '0';
+            while (!s.empty() && s.size() + n - i - 1 >= 12 && x > s.top()) {
+                s.pop();
             }
-
-            searchStart = matches.suffix().first;
+            if (s.size() < 12) {
+                s.push(x);
+            }   
         }
 
+        long long cur = 0, mul = 1;
+        while (!s.empty()) {
+            cur += s.top() * mul;
+            mul *= 10;
+            s.pop();
+        }
+        res += cur;
     }
 
-    fout << res << "\n";
-
+    fout << res << '\n';
     return 0;
 }

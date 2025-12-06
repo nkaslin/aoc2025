@@ -5,39 +5,26 @@ int main() {
     ifstream fin ("in.txt");
     ofstream fout ("out.txt");
 
-    string s;
+    string line;
+    int res = 0;
 
-
-    cout << s<< endl;
-
-    regex pattern(R"(mul\((\d+),(\d+)\))");
-
-    smatch matches;
-    int x, y;
-    ll res = 0;
-
-
-    while (getline(fin, s)) {
-        string::const_iterator searchStart(s.cbegin());
-
+    while (getline(fin, line)) {
+        stringstream ss(line);
         
-        while (regex_search(searchStart, s.cend(), matches, pattern)) {
-            x = stoi(matches[1]);
-            y = stoi(matches[2]);
-
-            res += x * y;
-
-            cout << x<<" "<<y<<endl;
-
-            cout<< matches.suffix()<<endl;
-
-            searchStart = matches.suffix().first;
+        int mx1 = 0, mx2 = 0;
+        int n = line.length();
+        for (int i=0; i<n; i++) {
+            int x = line[i] - '0';
+            if (x > mx1 && i < n - 1) {
+                mx1 = x;
+                mx2 = 0;
+            } else if (x > mx2) {
+                mx2 = x;
+            }
         }
+        res += 10 * mx1 + mx2;
 
     }
-    
-
-    fout << res << "\n";
-
+    fout << res << '\n';
     return 0;
 }
