@@ -18,8 +18,6 @@ long long check(long long lower, long long upper) {
                 break;
             }
         }
-
-      
     }
     return res;
 }

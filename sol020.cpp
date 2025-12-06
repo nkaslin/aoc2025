@@ -50,8 +50,6 @@ int main() {
             if (line[i] == '-') lower.push_back(cur);
             if (line[i] == ',') upper.push_back(cur);
         }
-        
-        
     }
 
     for (int i=0; i<upper.size(); i++) {

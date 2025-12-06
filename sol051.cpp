@@ -2,28 +2,28 @@
 
 // taken from https://leetcode.com/problems/merge-intervals/submissions/1513459791/
 vector<vector<long long>> merge_intervals(vector<vector<long long>>& segs) {
-        sort(segs.begin(), segs.end());
-        vector<vector<long long>> merged;
+    sort(segs.begin(), segs.end());
+    vector<vector<long long>> merged;
 
-        long long xprev = -1, yprev = -1;
+    long long xprev = -1, yprev = -1;
 
-        for (auto s: segs) {
-            if (xprev == -1 && yprev == -1) {
-                xprev = s[0];
-                yprev = s[1];
-                continue;
-            }
-            if (s[0] > yprev) {
-                merged.push_back({xprev, yprev});
-                xprev = s[0];
-                yprev = s[1];
-            } else {
-                yprev = max(yprev, s[1]);
-            }
+    for (auto s: segs) {
+        if (xprev == -1 && yprev == -1) {
+            xprev = s[0];
+            yprev = s[1];
+            continue;
         }
-        merged.push_back({xprev, yprev});
-        return merged;
+        if (s[0] > yprev) {
+            merged.push_back({xprev, yprev});
+            xprev = s[0];
+            yprev = s[1];
+        } else {
+            yprev = max(yprev, s[1]);
+        }
     }
+    merged.push_back({xprev, yprev});
+    return merged;
+}
 
 int main() {
     cin.tie(0)->sync_with_stdio(0);
