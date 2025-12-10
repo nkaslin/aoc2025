@@ -6,9 +6,9 @@
 #include <sstream>
 
 struct ParsedData {
-    string bracketData;
-    vector<vector<int>> tuples;
-    vector<int> curlyNumbers;
+    string lights;
+    vector<vector<int>> buttons;
+    vector<int> joltages;
 };
 
 ParsedData parse(const string& s) {
@@ -17,7 +17,7 @@ ParsedData parse(const string& s) {
         regex re(R"(\[(.*?)\])");
         smatch m;
         if (regex_search(s, m, re)) {
-            out.bracketData = m[1];
+            out.lights = m[1];
         }
     }
     {
@@ -36,7 +36,7 @@ ParsedData parse(const string& s) {
                 }
             }
 
-            out.tuples.push_back(values);
+            out.buttons.push_back(values);
         }
     }
     {
@@ -47,7 +47,7 @@ ParsedData parse(const string& s) {
             stringstream ss(inner);
             string tok;
             while (getline(ss, tok, ',')) {
-                out.curlyNumbers.push_back(stoi(tok));
+                out.joltages.push_back(stoi(tok));
             }
         }
     }
@@ -84,14 +84,14 @@ int main() {
     while (getline(fin, line)) {
         p = parse(line);
         int target = 0;
-        string target_string = p.bracketData;
+        string target_string = p.lights;
         for (int i=0; i<target_string.length(); i++) {
             if (target_string[i] == '#') {
                 target |= 1 << i;
             }
         }
         vector<int> switches;
-        for (auto& v : p.tuples) {
+        for (auto& v : p.buttons) {
             int cur = 0;
             for (int i=0; i<v.size(); i++) {
                 cur |= 1 << v[i];
