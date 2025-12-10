@@ -10,3 +10,5 @@
 .cph/
 .vs/
 .vscode/
+.venv/
+uv.lock
