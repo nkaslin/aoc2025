@@ -1,5 +1,3 @@
-*.txt
-
 # Ignore executables with no file extension
 *
 
@@ -12,3 +10,4 @@
 .vscode/
 .venv/
 uv.lock
+*.txt
