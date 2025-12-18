@@ -13,7 +13,7 @@ My solutions for AoC 2025
 | 6   | ✔️ | ✔️ |
 | 7   | ✔️ | ✔️ |
 | 8   | ✔️ | ✔️ |
-| 9   | ✔️ |  |
+| 9   | ✔️ | ✔️ (python, shapely) |
 | 10  | ✔️ | ✔️ (python, scipy) |
 | 11  | ✔️ DFS | ✔️ DFS |
-| 12  | ✔️ |  |
+| 12  | ✔️ | ⭐ |
